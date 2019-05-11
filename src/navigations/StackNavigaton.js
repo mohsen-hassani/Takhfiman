@@ -7,7 +7,8 @@ const appStackNabigation = createStackNavigator({
     Category,
     Detail
 },{
-    initialRouteName: 'Home'
+    initialRouteName: 'Home',
+    headerMode: 'none'
 });
 
 const StackNavigation = createAppContainer(appStackNabigation);
