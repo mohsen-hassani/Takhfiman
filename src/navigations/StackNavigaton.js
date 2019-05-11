@@ -1,8 +1,8 @@
-import {createAppContainer ,createStackNavigation} from 'react-navigation';
+import {createAppContainer ,createStackNavigator} from 'react-navigation';
 import {Home, Category, Detail} from '../screens/index';
 
 
-const appStackNabigation = createStackNavigation({
+const appStackNabigation = createStackNavigator({
     Home,
     Category,
     Detail
