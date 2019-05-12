@@ -3,11 +3,12 @@ import {
     StyleSheet,
     ActivityIndicator,
     FlatList,
-    Text,
     View,
+    ScrollView,
     RefreshControl,
   } from 'react-native';
 import axios from 'axios';
+import ItemDetail from '../components/common/ItemDetail';
 
 
 class Home extends Component {
@@ -18,11 +19,9 @@ class Home extends Component {
     }
 
     GetData = () => {
-        //Service to get the data from the server to render
         return axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/home.php')
           .then(response => this.setState({
               refreshing: false,
-              //Setting the data source for the list to render
               dataSource: response.data
             })).catch(error => {
                 alert(error);
@@ -50,18 +49,15 @@ class Home extends Component {
         }
 
         return(
-            <View>
+            <View style={{
+                backgroundColor: "#ddd",
+                flex:1
+            }}>
                 <FlatList
                 data={this.state.dataSource}
                 enableEmptySections={true}
                 keyExtractor = {i => i.id.toString()}
-                renderItem={({item}) => (
-                    <Text
-                    style={styles.rowViewContainer}
-                    onPress={() => alert(item.id)}>
-                    {item.name}
-                    </Text>
-                )}
+                renderItem={({item}) => <ItemDetail item={item} key={item.id} />}
                 refreshControl={
                     <RefreshControl
                     //refresh control used for the Pull to Refresh
@@ -87,5 +83,9 @@ const styles = StyleSheet.create({
     rowViewContainer: {
       fontSize: 20,
       padding: 10,
+    },
+    SlideShow:{
+        height: 220,
+        backgroundColor: '#eeeeaa'
     },
   });
