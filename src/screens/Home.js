@@ -9,6 +9,8 @@ import {
   } from 'react-native';
 import axios from 'axios';
 import ItemDetail from '../components/common/ItemDetail';
+import SlideShow from '../components/common/SlideShow';
+import styles from '../screens/ScreenStyles';
 
 
 class Home extends Component {
@@ -36,6 +38,9 @@ class Home extends Component {
         this.GetData();
     }
 
+    renderHeader = () => {
+        return (<SlideShow />);
+    }
 
     render(){
 
@@ -54,6 +59,7 @@ class Home extends Component {
                 flex:1
             }}>
                 <FlatList
+                ListHeaderComponent={this.renderHeader}
                 data={this.state.dataSource}
                 enableEmptySections={true}
                 keyExtractor = {i => i.id.toString()}
@@ -72,20 +78,3 @@ class Home extends Component {
 }
 
 export { Home };
-
-
-const styles = StyleSheet.create({
-    MainContainer: {
-      justifyContent: 'center',
-      flex: 1,
-      marginTop: 10,
-    },
-    rowViewContainer: {
-      fontSize: 20,
-      padding: 10,
-    },
-    SlideShow:{
-        height: 220,
-        backgroundColor: '#eeeeaa'
-    },
-  });
