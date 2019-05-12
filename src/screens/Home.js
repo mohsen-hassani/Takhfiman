@@ -5,9 +5,9 @@ import {
     FlatList,
     Text,
     View,
-    Alert,
     RefreshControl,
   } from 'react-native';
+import axios from 'axios';
 
 
 class Home extends Component {
@@ -19,19 +19,15 @@ class Home extends Component {
 
     GetData = () => {
         //Service to get the data from the server to render
-        return fetch('https://jsonplaceholder.typicode.com/posts')
-          .then(response => response.json())
-          .then(responseJson => {
-            this.setState({
+        return axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/home.php')
+          .then(response => this.setState({
               refreshing: false,
               //Setting the data source for the list to render
-              dataSource: responseJson
-            });
-        })
-          .catch(error => {
-            console.error(error);
-        });
-    };
+              dataSource: response.data
+            })).catch(error => {
+                alert(error);
+            })
+        };
     
 
     onRefresh() {
@@ -63,7 +59,7 @@ class Home extends Component {
                     <Text
                     style={styles.rowViewContainer}
                     onPress={() => alert(item.id)}>
-                    {item.title}
+                    {item.name}
                     </Text>
                 )}
                 refreshControl={
