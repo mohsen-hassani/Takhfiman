@@ -63,7 +63,7 @@ class Home extends Component {
                 data={this.state.dataSource}
                 enableEmptySections={true}
                 keyExtractor = {i => i.id.toString()}
-                renderItem={({item}) => <ItemDetail item={item} key={item.id} />}
+                renderItem={({item}) => <ItemDetail item={item} key={item.id} navigation={this.props.navigation} />}
                 refreshControl={
                     <RefreshControl
                     //refresh control used for the Pull to Refresh

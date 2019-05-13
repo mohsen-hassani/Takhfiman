@@ -122,9 +122,9 @@ class ImageSlideShow extends Component {
 
   GetData = () => {
     return axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/slideshow.php')
-          .then(response => this.setState({
-              slides: response.data
-            })).catch(error => {
+          .then(response =>
+              this.setState({slides: response.data})
+            ).catch(error => {
                 alert(error);
             })
   }
@@ -132,51 +132,8 @@ class ImageSlideShow extends Component {
 
   constructor(props){
     super(props);
-    this.state = {slides: [
-      {
-        "id": "3",
-        "name": "استخر نشاط",
-        "product": "سانس 12 شب",
-        "off": 30,
-        "start": "1398/2/20",
-        "days": 30,
-        "category": "مراکز ورزشی",
-        "pre_price": "30,000",
-        "new_price": "21,000",
-        "pic": "estakhr12982.jpg",
-        "small_address": "پارک نشاط",
-        "bann": "no"
-      },
-      {
-        "id": "6",
-        "name": "سر برگر",
-        "product": "انواع پیتزا ",
-        "off": 15,
-        "start": "1398/2/2",
-        "days": 120,
-        "category": "رستوران و فست فود",
-        "pre_price": "",
-        "new_price": "",
-        "pic": "serberger1982.jpg",
-        "small_address": "بلوار جمهوری",
-        "bann": "yes"
-      },
-      {
-        "id": "9",
-        "name": "باغ شازده ماهان",
-        "product": "بلیط ورودی باغ شازده",
-        "off": 30,
-        "start": "1398/1/1",
-        "days": 90,
-        "category": "تفریحی و گردشگری",
-        "pre_price": "20,000",
-        "new_price": "14,000",
-        "pic": "shazdemahan1982.jpg",
-        "small_address": "ماهان",
-        "bann": "yes"
-      }
-    ]}
-    //this.GetData();
+    this.state = {slides: []}
+    this.GetData();
 
   }
 

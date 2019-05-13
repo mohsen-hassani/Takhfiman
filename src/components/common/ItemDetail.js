@@ -1,77 +1,81 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 import CardSection from './CardSection';
 import Card from './Card';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
+class ItemDetail extends Component {
 
-const Func = (product) => {
-    alert(product);
-}
+    Func = (product) => {
+        this.props.navigation.navigate('Detail');
+    }
 
-const ItemDetail = (props) => {
-    return (
-        <TouchableOpacity 
-            activeOpacity={1}
-            onPress={() => Func(props.item.product)}>
-            <CardSection>
-                <Card>
-                    <Image 
-                        source={{uri: 'http://unicore.ir/t/Takhfiman/0.1/Images/' + props.item.pic}}
-                        style={styles.imageStyle} 
-                        />
-                </Card>
-                <Card>
-                    <View style={{
-                        padding: 5,
-                        justifyContent: 'space-between',
-                        flex: 1,
-                        flexDirection: 'row',
 
-                    }}>
+    render()
+    {    
+        return (
+            <TouchableOpacity 
+                activeOpacity={1}
+                onPress={() => this.Func(this.props.item.product)}>
+                <CardSection>
+                    <Card>
+                        <Image 
+                            source={{uri: 'http://unicore.ir/t/Takhfiman/0.1/Images/' + this.props.item.pic}}
+                            style={styles.imageStyle} 
+                            />
+                    </Card>
+                    <Card>
                         <View style={{
-                            flexDirection: 'row'
+                            padding: 5,
+                            justifyContent: 'space-between',
+                            flex: 1,
+                            flexDirection: 'row',
+
                         }}>
                             <View style={{
-                            flexDirection: 'row'
+                                flexDirection: 'row'
                             }}>
-                                <Text style={styles.OffTextStyle}>
-                                    {props.item.off}%
-                                </Text>
+                                <View style={{
+                                flexDirection: 'row'
+                                }}>
+                                    <Text style={styles.OffTextStyle}>
+                                        {this.props.item.off}%
+                                    </Text>
+                                </View>
+                                <View style={{
+                                flexDirection: 'column'
+                                }}>
+                                    <Text style={styles.NewPriceStyle}>
+                                        {this.props.item.new_price}
+                                    </Text>
+                                    <Text style={styles.PrePriceStyle}>
+                                        {this.props.item.pre_price}
+                                    </Text>
+                                </View>
                             </View>
                             <View style={{
-                            flexDirection: 'column'
+                                flexDirection: 'column'
                             }}>
-                                <Text style={styles.NewPriceStyle}>
-                                    {props.item.new_price}
+                                <Text style={styles.albumTitleStyle}>
+                                    {this.props.item.product}
                                 </Text>
-                                <Text style={styles.PrePriceStyle}>
-                                    {props.item.pre_price}
-                                </Text>
+                                <View style={{
+                                    flexDirection: 'row',
+                                    flex:1,
+                                    justifyContent: 'flex-end'
+                                }}>
+                                    <Text style={styles.albumArtistStyle}>
+                                        {this.props.item.small_address}, {this.props.item.name}
+                                    </Text>
+                                    <Icon name={'location-pin'} size={15} style={{marginLeft:5}} />
+                                </View>
                             </View>
                         </View>
-                        <View style={{
-                            flexDirection: 'column'
-                        }}>
-                            <Text style={styles.albumTitleStyle}>
-                                {props.item.product}
-                            </Text>
-                            <View style={{
-                                flexDirection: 'row',
-                                flex:1,
-                                justifyContent: 'flex-end'
-                            }}>
-                                <Text style={styles.albumArtistStyle}>
-                                    {props.item.small_address}, {props.item.name}
-                                </Text>
-                                <Icon name={'location-pin'} size={15} style={{marginLeft:5}} />
-                            </View>
-                        </View>
-                    </View>
-                </Card>
-            </CardSection>
-        </TouchableOpacity>
-    );
+                    </Card>
+                </CardSection>
+            </TouchableOpacity>
+        );
+    }
 }
 
 export default ItemDetail;
