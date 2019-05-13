@@ -1,7 +1,8 @@
 export default styles = {
     SlideShow:{
-        height: 220,
-        backgroundColor: '#eeeeaa'
+        height: 275,
+        backgroundColor: '#eeeeaa',
+        marginBottom: 10
     },
     container: {
         flex: 1,

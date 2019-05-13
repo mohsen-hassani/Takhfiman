@@ -5,15 +5,15 @@ import Card from './Card';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 
-const Func = () => {
-    alert('hoo');
+const Func = (product) => {
+    alert(product);
 }
 
 const ItemDetail = (props) => {
     return (
         <TouchableOpacity 
             activeOpacity={1}
-            onPress={() => Func()}>
+            onPress={() => Func(props.item.product)}>
             <CardSection>
                 <Card>
                     <Image 
@@ -92,6 +92,7 @@ const styles = {
     },
     albumTitleStyle:{
         fontSize:18,
+        color: '#555'
     },
     albumArtistStyle:{
         fontSize:12,
@@ -106,7 +107,7 @@ const styles = {
         fontSize: 18
     },
     OffTextStyle:{
-        backgroundColor: 'darkred',
+        backgroundColor: '#ffbb00',
         color: 'white',
         textAlign: 'center',
         textAlignVertical: 'center',
