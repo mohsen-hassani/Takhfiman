@@ -111,7 +111,7 @@ const styles = {
         fontSize: 18
     },
     OffTextStyle:{
-        backgroundColor: '#ffbb00',
+        backgroundColor: '#aa4444',
         color: 'white',
         textAlign: 'center',
         textAlignVertical: 'center',

@@ -10,7 +10,6 @@ import {
 import axios from 'axios';
 import ItemDetail from '../components/common/ItemDetail';
 import SlideShow from '../components/common/SlideShow';
-import styles from '../screens/ScreenStyles';
 
 
 class Home extends Component {

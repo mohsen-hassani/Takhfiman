@@ -16,7 +16,7 @@ export default class Header extends Component{
                         name="md-arrow-forward" 
                         size={30} 
                         style={styles.HeaderBackIcon}
-                        color={"#FFF"} />
+                        color={"#777"} />
                 </TouchableOpacity>
             </View>
         );
