@@ -3,9 +3,10 @@ import {View, Text, FlatList, ActivityIndicator, RefreshControl} from 'react-nat
 import Header from '../components/common/Header';
 import axios from 'axios';
 import ItemDetail from '../components/common/ItemDetail';
+import Styles from '../components/common/Styles';
 
 
-class Category extends Component {
+class SearchResult extends Component {
     constructor(props){
         super(props);
 
@@ -16,22 +17,24 @@ class Category extends Component {
     }
 
     GetData = () => {
-        let id = this.props.navigation.getParam('id', 0)
-        return axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/category.php?id=' + id)
+        let q = this.props.navigation.getParam('qu', '')
+        console.log(q)
+
+        return axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/search.php?q=' + q)
           .then(response => 
             {
                 this.setState({
                     loading: false,
+                    q: q,
                     dataSource: response.data
                 });
-                console.log(id)
             }).catch(error => {
                 alert(error);
             })
     }
 
     renderHeader = () => {
-        return <Header headerText={this.props.navigation.getParam('cat_name','دسته بندی')} navigation={this.props.navigation}/>
+        return <Header headerText={'جستجو برای:‌ ' + this.state.q} navigation={this.props.navigation}/>
     }
 
     onRefresh() {
@@ -43,7 +46,6 @@ class Category extends Component {
 
 
     render(){
-        console.log(this.state.loading + ": " + this.state.dataSource)
         if(this.state.loading === true)
         {
             return (
@@ -86,13 +88,14 @@ class Category extends Component {
                             alignItems: 'center',
                             flex: 1
                         }}>
-                            <Text>این دسته بندی خالی است</Text>
+                            <Text>جستجوی شما نتیجه ای در بر نداشت</Text>
                         </View>
                     </View>
                 )
             }
+            
         }
     }
 }
 
-export { Category };
+export { SearchResult };

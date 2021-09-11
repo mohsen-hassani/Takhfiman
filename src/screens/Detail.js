@@ -12,14 +12,17 @@ class Detail extends Component {
     constructor(props){
         super(props);
 
+        let id = this.props.navigation.getParam('id', 0)
         this.state = {
-            loading: true
+            loading: true,
+            item_id: id
         };
-        this.GetData();
+        
+        this.GetData(id)
     }
 
-    GetData = () => {
-        axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/detail.php?id=2')
+    GetData = (id) => {
+        axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/detail.php?id=' + id)
         .then(response => {
             this.setState({
                 Data: response.data,
@@ -59,17 +62,18 @@ class Detail extends Component {
                 product, 
                 name, 
                 off, 
-                full_address, 
-                description,
                 start,
+                days,
+                category,
                 pre_price,
                 new_price,
-                days,
+                full_address, 
+                description,
                 type,
                 terms,
                 guide,
                 phone,
-                website
+                website,
             } = this.state.Data
             let message = product+" "+name+" "+" همراه با "+off+"% درصد تخفیف"
             let show_price = false
@@ -79,7 +83,7 @@ class Detail extends Component {
                 show_price = true
             }
             message += '\n'
-            message += "جزپیات و تخفبف های بیشتر کرمان را در اپلیکیشن تخفیمان ببین"
+            share_message = message + "جزپیات و تخفبف های بیشتر کرمان را در اپلیکیشن تخفیمان ببین"
             return(
                 <ScrollView style={{flex: 1}}>
                     <Header headerText={product} navigation={this.props.navigation}/>
@@ -89,14 +93,8 @@ class Detail extends Component {
                                 {message}
                             </Text>
                         </View>
-                        <View style={Styles.Row}>
-                            <Text style={{marginLeft: 10}}>
-                                {description}
-                            </Text>
-                        </View>
                     </View>
 
-                    <View style={Styles.container}>
                         <View style={Styles.Row}>
                             <View style={{
                                 flex:3, 
@@ -133,10 +131,19 @@ class Detail extends Component {
                                 <Text>تخفیف</Text>
                             </View>
                         </View>
+
+                    <View style={Styles.container}>
+                        <View style={Styles.Row}>
+                            <Text style={{marginLeft: 10}}>
+                                {description}
+                            </Text>
+                        </View>
                     </View>
 
 
-                    <DetailSlideShow id={2} />
+                    <DetailSlideShow id={this.state.item_id} />
+
+                    
                     <View style={Styles.container}>
                         <View style={Styles.Row}>
                             <View style={{flex:1, alignItems: 'center', borderRightWidth:1, borderRightColor: '#ccc'}}>
@@ -146,7 +153,7 @@ class Detail extends Component {
                                     width: '100%'
                                 }} onPress={() => {
                                     Share.share({
-                                        message: message,
+                                        message: share_message,
                                       });
                                 }}>
                                     <Icon name='share' size={20} color='#aa4444' />
@@ -158,7 +165,7 @@ class Detail extends Component {
                                     padding: 10,
                                     width: '100%'
                                 }} onPress={() => {
-                                    Linking.openURL('http://www.unicore.ir/t/Takhfiman/report.php?id=' + id)
+                                    Linking.openURL('http://www.unicore.ir/t/Takhfiman/0.1/Data/report.php?id=' + id)
                                 }}>
                                     <Icon name='bell' size={20} color='#aa4444' />
                                 </TouchableOpacity>
@@ -257,7 +264,6 @@ class Detail extends Component {
                         <View style={Styles.Row}>
                             <View style={Styles.Column}>
                                 <Text style={{fontSize: 16, fontWeight: 'bold'}}>وب سایت</Text>
-                                <Text style={{marginLeft: 50}}>{full_address}</Text>
                                 <TouchableOpacity onPress={() => {
                                     Linking.openURL(website)
                                 }} style={{padding: 10, marginLeft: 50 }}>

@@ -24,7 +24,7 @@ class TextInputWithButton extends Component {
       <View style={styles.SearchContainer}>
           <View style={styles.SearchButton}>
             <TouchableHighlight onPress={() => {
-                alert(this.state.text)
+                this.props.navigation.navigate('SearchResult', {'qu': this.state.text})
             }}>
                 <Icon name={'magnifier'} size={20} color={'#555'} style={{marginLeft:5}} />
             </TouchableHighlight>

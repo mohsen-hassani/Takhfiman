@@ -17,7 +17,28 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 class SlideShow extends Component {
 
   LoadCategory = (cat_id) => {
-    alert("Category " + cat_id);
+    let cat_name = "";
+    switch (cat_id) {
+      case 5:
+        cat_name = "مراکز ورزشی";
+        break;
+      case 4:
+        cat_name = "زیبایی";
+        break;
+      case 3:
+        cat_name = "مراکز تفریحی";
+        break;
+      case 2:
+        cat_name = "مراکز خرید";
+        break;
+      case 1:
+        cat_name = "رستوران";
+        break;
+    
+      default:
+        break;
+    }
+    this.props.navigation.navigate('Category', {'cat_name': cat_name, 'id': cat_id})
   }
 
 
@@ -109,7 +130,7 @@ class SlideShow extends Component {
               </View>
           </View>
           <View style={styles.SearchContainer}>
-            <TextInputWithButton />
+            <TextInputWithButton navigation={this.props.navigation}/>
           </View>
       </View>
 

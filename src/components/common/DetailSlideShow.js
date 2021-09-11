@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component} from 'react'
 import {
     View,
     SafeAreaView,
@@ -6,10 +6,11 @@ import {
     TouchableHighlight,
     TouchableOpacity,
     Text
-  } from 'react-native';
-import axios from 'axios';
-import styles from './Styles';
-import ImageSlider from 'react-native-image-slider';
+  } from 'react-native'
+import axios from 'axios'
+import styles from './Styles'
+import ImageSlider from 'react-native-image-slider'
+import ImageNotAvailable from '../../images/no_image_available.jpg'
 
 
 
@@ -35,50 +36,71 @@ class DetailSlideShow extends Component {
     getImages = () => {
       images = [];
       this.state.slides.map(element => {
-        images.push('http://unicore.ir/t/Takhfiman/0.1/Images/' + element.pic);
+        images.push('http://unicore.ir/t/Takhfiman/0.1/Images/' + element.pic)
       });
       return images;
     }
   
     render() {
-      return (
-        <SafeAreaView style={styles.iContainer}>
-          <ImageSlider
-            autoPlayWithInterval={5000}
-            images={this.getImages()}
-            customSlide={({ index, item, style, width }) => (
-              <View key={index} style={[style, styles.customSlide]}>
-                  <ImageBackground source={{ uri: item }} style={styles.customImage}>
-                  <TouchableOpacity>
-                    <Text style={{
-                      backgroundColor:'red',
-                      padding: 100,
-                      opacity: 0
-                    }}>
-                    </Text>
-                  </TouchableOpacity>
-                  </ImageBackground>
-              </View>
-            )}
-            customButtons={(position, move) => (
-              <View style={styles.buttons}>
-                {images.map((image, index) => {
-                  return (
-                    <TouchableHighlight
-                      key={index}
-                      underlayColor="#ccc"
-                      onPress={() => move(index)}
-                      style={styles.button}
-                    >
-                      <PointButton index={index} position={position} />
-                    </TouchableHighlight>
-                  );
-                })}
-              </View>
-            )}
-          />
-        </SafeAreaView>
-      );
+      imgs = this.getImages()
+      if(imgs.length > 0)
+      {
+        return (
+          <SafeAreaView style={styles.iContainer}>
+            <ImageSlider
+              autoPlayWithInterval={5000}
+              images={this.getImages()}
+              customSlide={({ index, item, style, width }) => (
+                <View key={index} style={[style, styles.customSlide]}>
+                    <ImageBackground source={{ uri: item }} style={styles.customImage}>
+                    <TouchableOpacity>
+                      <Text style={{
+                        backgroundColor:'red',
+                        padding: 100,
+                        opacity: 0
+                      }}>
+                      </Text>
+                    </TouchableOpacity>
+                    </ImageBackground>
+                </View>
+              )}
+              customButtons={(position, move) => (
+                <View style={styles.buttons}>
+                  {images.map((image, index) => {
+                    return (
+                      <TouchableHighlight
+                        key={index}
+                        underlayColor="#ccc"
+                        onPress={() => move(index)}
+                        style={styles.button}
+                      >
+                        <PointButton index={index} position={position} />
+                      </TouchableHighlight>
+                    );
+                  })}
+                </View>
+              )}
+            />
+          </SafeAreaView>
+        );
+      }
+      else
+      {
+        return (
+          <View style={styles.customSlide}>
+              <ImageBackground source={ImageNotAvailable} style={styles.customImage}>
+              <TouchableOpacity>
+                <Text style={{
+                  backgroundColor:'red',
+                  padding: 100,
+                  opacity: 0
+                }}>
+                </Text>
+              </TouchableOpacity>
+              </ImageBackground>
+          </View> 
+        )
+      }
     }
   }
   

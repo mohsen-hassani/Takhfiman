@@ -4,10 +4,11 @@ import CardSection from './CardSection';
 import Card from './Card';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
+
 class ItemDetail extends Component {
 
-    Func = (product) => {
-        this.props.navigation.navigate('Detail');
+    Func = (id) => {
+        this.props.navigation.navigate('Detail', {'id': id});
     }
 
 
@@ -16,7 +17,7 @@ class ItemDetail extends Component {
         return (
             <TouchableOpacity 
                 activeOpacity={1}
-                onPress={() => this.Func(this.props.item.product)}>
+                onPress={() => this.Func(this.props.item.id)}>
                 <CardSection>
                     <Card>
                         <Image 

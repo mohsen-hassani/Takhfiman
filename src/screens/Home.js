@@ -21,10 +21,12 @@ class Home extends Component {
 
     GetData = () => {
         return axios.get('http://unicore.ir/t/Takhfiman/0.1/Data/generators/home.php')
-          .then(response => this.setState({
+          .then(response => {
+              this.setState({
               refreshing: false,
               dataSource: response.data
-            })).catch(error => {
+            })
+        }).catch(error => {
                 alert(error);
             })
         };
@@ -38,11 +40,10 @@ class Home extends Component {
     }
 
     renderHeader = () => {
-        return (<SlideShow />);
+        return (<SlideShow navigation={this.props.navigation} />);
     }
 
     render(){
-
         if (this.state.refreshing) {
             return (
               //loading view while data is loading

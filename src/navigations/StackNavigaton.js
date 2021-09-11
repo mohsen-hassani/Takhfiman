@@ -1,11 +1,12 @@
 import {createAppContainer ,createStackNavigator} from 'react-navigation';
-import {Home, Category, Detail} from '../screens/index';
+import {Home, Category, Detail, SearchResult} from '../screens/index';
 
 
 const appStackNabigation = createStackNavigator({
     Home,
     Category,
-    Detail
+    Detail,
+    SearchResult
 },{
     initialRouteName: 'Home',
     headerMode: 'none'
